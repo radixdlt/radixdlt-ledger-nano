@@ -10,14 +10,6 @@ Following the README of their repo I managed to install their app on my Ledger N
 
 # Debugging (Optional)
 
-## Delete installed app on Ledger
-
-1. Make sure you are **not** running the macOS Desktop Ledger Manager app called _Ledger Live_ - if you are, quit it.
-2. In your host shell (python virtualenv is not needed if you have installed `ledgerblue` pip package on your host machine), run:  
-
-	`python -m ledgerblue.deleteApp --targetId 0x31100004 --appName Radix`
-3. Confirm deletion on your Ledger Nano S
-
 ## Notes on using `ledger-app-hs` (Handshake)
 > ⚠️ This (sub)section has nothing to do with the content of this git repo (Radix DLT's Ledger Nano S app), it is notes on how to use the Handshake app
 
@@ -99,13 +91,50 @@ source ledger/bin/activate
 pip install ledgerblue
 ```
 
-### Run
+### Build and install
 (Assuming your current directory is `make docker-load` with the python `virtualenv` _activated_)
 
-> 💡 Running this command takes 5 minutes (at least first time, not sure if it is faster second time), and at the end manual input in your Ledger Nano S is required
-> 
+> ☣️ Make sure you are **not** running the macOS Desktop Ledger Manager app called _Ledger Live_ - if you are, quit it.  
+> 💡 Running this command takes 5 minutes and at the end manual input in your Ledger Nano S is required. This command is verbose and you will see lots of red warnings shown, ignore those, even though some might sounds scary (e.g. _fatal error_)
+> 💡 Second time you run the command it takes about 1 minute.
+
 ```sh
 make docker-load
 ```
 
-At end of build, manual input is needed on your _Ledger Nano S_, navigate one screen **leftt** (or many screens right until you see option _Allow unsafe manager_), click both bottons and then navigate **two** screens left (or many screens _right_ until _Perform installation_ option), click both buttons. Finalize by entering your PIN code. `make docker-load` command should now have finished in your shell.
+
+You will see output like this:
+
+```bash
+Generated random root public key : b'0484cbc761c387c27c1b8126664b6b65bb5f706014c406ce592ab7e41b1d2e0849338f920e754615c36cd6a37cec08ce2bbf949bea4d5f524d1d726cd0616547d0'
+Using test master key b'0484cbc761c387c27c1b8126664b6b65bb5f706014c406ce592ab7e41b1d2e0849338f920e754615c36cd6a37cec08ce2bbf949bea4d5f524d1d726cd0616547d0'
+Using ephemeral key b'04662028f12f8a1ebf814ba8f9f6a3794c078416f32c275f17b651adf12c39e62ee27d4e9be42cf3d801c90af0ff7b9626bbd836d3188d0db8c0b5c21372cc5bc9'
+Broken certificate chain - loading from user key
+```
+
+Nevermind the warning: _Broken certificate chain_
+
+At end of build, manual input is needed on your _Ledger Nano S_, navigate one screen **left** (or many screens right until you see option _Allow unsafe manager_), click both bottons and then navigate **two** screens left (or many screens _right_ until _Perform installation_ option), click both buttons. Finalize by entering your PIN code. `make docker-load` command should now have finished in your shell.
+
+### Uninstall
+```sh
+make delete
+```
+
+Manual input is needed on your _Ledger Nano S_, navigate one screen **left** (or many screens right until you see option _Allow unsafe manager_), click both bottons and then navigate **two** screens left (or many screens _right_ until _Perform deletion_ option), click both buttons. Finalize by entering your PIN code.
+
+
+#### Uninstall globally
+Install `ledgerblue` globally (to be able to uninstall apps on Ledger independently on any other code...): 
+
+```sh
+sudo -H python3 -m pip install ledgerblue
+```
+
+Run:  
+
+```sh
+python -m ledgerblue.deleteApp --targetId 0x31100004 --appName <NAME_OF_APP>
+```
+
+Where `<NAME_OF_APP>` should be replaced with the name of the app you wanna uninstall (as you see it on your Ledger).
