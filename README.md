@@ -24,7 +24,35 @@ Following the README of their repo I managed to install their app on my Ledger N
 Complete guide:
 
 ### Prerequisites
-Make sure you have `Docker`, `Python`, `make`, `gcc`, `g++` installed on your host
+
+
+#### Brew
+Install [brew](https://brew.sh)
+
+#### Docker
+
+Install [Docker](https://www.docker.com/get-started)
+Start Docker  (requires privilages to be setup first time it is run)
+
+#### Python, pip, virtualenv
+
+```sh
+brew install python3
+```
+
+This will also install `pip`, but you might wanna update it
+
+```sh
+sudo -H python3 -m pip install --upgrade pip
+```
+
+##### Virtualenv
+
+```sh
+sudo -H python3 -m pip install virtualenv
+```
+
+#### `~/Developer` dir
 
 Make sure you have a `~/Developer` directory (if not, you should create one and move all your code to it, _Finder_ renders it with a nice hammer icon, so is for sure the intended directory for your code 😀)
 
