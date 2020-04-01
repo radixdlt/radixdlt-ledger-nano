@@ -101,6 +101,11 @@ pip install ledgerblue
 
 ### Run
 (Assuming your current directory is `make docker-load` with the python `virtualenv` _activated_)
+
+> 💡 Running this command takes 5 minutes (at least first time, not sure if it is faster second time), and at the end manual input in your Ledger Nano S is required
+> 
 ```sh
 make docker-load
 ```
+
+At end of build, manual input is needed on your _Ledger Nano S_, navigate one screen **leftt** (or many screens right until you see option _Allow unsafe manager_), click both bottons and then navigate **two** screens left (or many screens _right_ until _Perform installation_ option), click both buttons. Finalize by entering your PIN code. `make docker-load` command should now have finished in your shell.
