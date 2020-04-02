@@ -17,9 +17,16 @@ Complete guide:
 
 ### Prerequisites
 
-
 #### Brew
 Install [brew](https://brew.sh)
+
+#### `make` `gcc`
+
+If you have _Xcode_ and _Command Line Tools_ you can probably skip this step:
+
+```sh
+brew install make gcc
+```
 
 #### Docker
 
@@ -92,7 +99,7 @@ pip install ledgerblue
 ```
 
 ### Build and install
-(Assuming your current directory is `make docker-load` with the python `virtualenv` _activated_)
+(Assuming your current directory is `~/Developer/ledger-app-hns` with the python `virtualenv` _activated_)
 
 > ☣️ Make sure you are **not** running the macOS Desktop Ledger Manager app called _Ledger Live_ - if you are, quit it.  
 > 💡 Running this command takes 5 minutes and at the end manual input in your Ledger Nano S is required. This command is verbose and you will see lots of red warnings shown, ignore those, even though some might sounds scary (e.g. _fatal error_)
